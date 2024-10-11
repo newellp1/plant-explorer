@@ -15,9 +15,10 @@ Plant Explorer is a Python application that interacts with the Trefle API to sea
 - python-dotenv for loading API keys
 
 ## Installation
-1. Clone the repository.
+1. Clone the repository or upload files to your desired environment (e.g., PythonAnywhere).
 2. Install dependencies by running:
    ```bash
    pip install -r requirements.txt
+
 
 ## Issues
