@@ -22,3 +22,4 @@ Plant Explorer is a Python application that interacts with the Trefle API to sea
 
 
 ## Issues
+The search functionality is working fine but the result is pulling a bunch of plant common names and thier scientific names and not the one that I had searched for.  However, when I attempt to retrieve the details for a specific plant by its ID, the results for common name, scientific name, family, and other fields are not being populated correctly.

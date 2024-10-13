@@ -2,44 +2,45 @@ import requests
 from dotenv import load_dotenv
 import os
 
-load_dotenv()  # Load environment variables from .env file
-api_key = os.getenv('API_KEY')
-
 class TrefleAPIService:
-    BASE_URL = "https://trefle.io/api/v1"
-
-    def search_plants(self, name):
-        url = f"{self.BASE_URL}/plants?token={api_key}&q={name}"
+    def __init__(self):
+        # Load the environment variables
+        load_dotenv()
+        self.api_key = os.getenv('API_KEY')
+    
+    def search_plants_by_name(self, plant_name):
+        url = f"https://trefle.io/api/v1/plants?token={self.api_key}&q={plant_name}"
         response = requests.get(url)
         if response.status_code == 200:
-            return response.json()
+            return response.json()['data']
         else:
-            print(f"Error: {response.status_code} - {response.text}")
+            print(f"Error: {response.status_code}")
             return None
 
-    def get_plant_detail(self, plant_id):
-        url = f"{self.BASE_URL}/species/{plant_id}?token={api_key}"
+    def explore_plants_by_family(self, family_name):
+        url = f"https://trefle.io/api/v1/families/{family_name}/plants?token={self.api_key}"
         response = requests.get(url)
         if response.status_code == 200:
-            return response.json()
+            return response.json()['data']
         else:
-            print(f"Error: {response.status_code} - {response.text}")
+            print(f"Error: {response.status_code}")
             return None
 
-    def search_by_family(self, family):
-        url = f"{self.BASE_URL}/families?token={api_key}&q={family}"
+    def search_plants_by_region(self, region_name):
+        url = f"https://trefle.io/api/v1/distributions/{region_name}/plants?token={self.api_key}"
         response = requests.get(url)
         if response.status_code == 200:
-            return response.json()
+            return response.json()['data']
         else:
-            print(f"Error: {response.status_code} - {response.text}")
+            print(f"Error: {response.status_code}")
             return None
 
-    def search_by_region(self, region):
-        url = f"{self.BASE_URL}/distributions/{region}?token={api_key}"
+    def get_plant_details(self, plant_id):
+        # Use the 'plants' endpoint instead of 'species' to get details based on plant ID
+        url = f"https://trefle.io/api/v1/plants/{plant_id}?token={self.api_key}"
         response = requests.get(url)
         if response.status_code == 200:
-            return response.json()
+            return response.json()['data']  # Ensure you're accessing the 'data' part of the JSON
         else:
-            print(f"Error: {response.status_code} - {response.text}")
+            print(f"Error: {response.status_code}")
             return None
