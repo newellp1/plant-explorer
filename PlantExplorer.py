@@ -72,7 +72,16 @@ class PlantExplorer:
             print(f"Scientific Name: {plant_details.get('scientific_name', 'N/A')}")
             print(f"Family: {plant_details.get('family', {}).get('name', 'N/A')}")
             print(f"Genus: {plant_details.get('genus', {}).get('name', 'N/A')}")
-            print(f"Species: {plant_details.get('species', {}).get('name', 'N/A')}")
+
+            # Handle species field as a list
+            species_list = plant_details.get('species', [])
+            if species_list:
+                print("Species Information:")
+                for species in species_list:
+                    print(f"  - Species Name: {species.get('scientific_name', 'N/A')}")
+            else:
+                print("Species: N/A")
+
             print(f"Growth Habit: {plant_details.get('growth_habit', 'N/A')}")
             print(f"Bloom Period: {plant_details.get('bloom_period', 'N/A')}")
             print(f"Conservation Status: {plant_details.get('conservation_status', 'N/A')}")
